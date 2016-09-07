@@ -148,6 +148,7 @@
         </tx:attributes>
     </tx:advice>
 
+	<!-- 基于类的代理，强制使用cglib库 -->
     <aop:config expose-proxy="true" proxy-target-class="true">
         <!-- 只对业务逻辑层实施事务 -->
         <aop:pointcut id="txPointcut" expression="execution(* com.sishuok.es..service..*+.*(..)) or execution(* com.sishuok.es..task..*+.*(..))"/>

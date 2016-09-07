@@ -89,7 +89,9 @@
 ####2、到项目的根下(es)
 * cd bin
 * install.bat 安装jar包到本地仓库（jdk6即可）
-* create-db.bat 创建数据库（mysql需要5.5及以上 编码为utf-8）
+* create-db.bat 创建数据库（mysql需要5.5及以上 编码为utf-8：
+	添加［mysqld］default-character-set=utf8
+	验证： show variables like '%char%';   show variables like 'collation%';  只有utf8没有latin1
 * refresh-db.bat 创建schema和初始化data
 * jetty.bat 启动web应用 默认端口9080 可以到es/web/pom.xml下修改（servlet 2.5即可）
 * 系统默认帐户是admin/123456
@@ -97,3 +99,17 @@
 ####3、注意
 如果你是用mvn jetty:run启动项目，默认会执行speed-up 应用，不过可以到src/main/resources/spring-speed-up.xml中把profile="development"改成任意其他的即可，或者删除<br/>
 请参考<a href='http://jinnianshilongnian.iteye.com/blog/1883013'>加速spring/hibernate应用调试时启动速度</a>
+问题原因：
+1.JDK配置问题
+2.Spring版本问题
+修改方法：
+关于ES脚手架框架升级到JDK 7.0以及Spring配置问题
+es-parent/pom.xml
+修改成
+<spring.version>4.0.1.RELEASE</spring.version>
+es/codegen/pom.xml
+<jdk.version>1.7</jdk.version>
+es/parent/pom.xml
+<jdk.version>1.7</jdk.version>
+
+Login:http://localhost:9080/es-web/
